@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, Container } from "@mui/system";
+import { CssBaseline, Tab, Tabs } from "@mui/material";
+import { Fragment, useState } from "react";
+import Settings from "./Settings";
 
 function App() {
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setSelectedTab(newValue);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <CssBaseline />
+      <Container maxWidth={false} disableGutters>
+        <Tabs value={selectedTab} onChange={handleChange}>
+          <Tab label="Reports" />
+          <Tab label="Settings" />
+        </Tabs>
+
+        <Box p={5}>{selectedTab === 1 && <Settings></Settings>}</Box>
+      </Container>
+    </Fragment>
   );
 }
 
